@@ -31,14 +31,16 @@ StateManager.prototype.updateState = function updateState(value) {
   this.emit('afterUpdate', [this.getState(), this.getPrevState()])
 }
 
-StateManager.prototype.subscribe = function subscribe(prop, cb) {
+StateManager.prototype.subscribe = function subscribe(_path, cb) {
   const self = this
 
-  if (!self.utility.isString(prop) || !self.utility.isFunction(cb)) return;
+  if (!self.utility.isFunction(cb)) return;
+
+  if (!self.utility.isString(_path) && !self.utility.isArray(_path)) return;
 
   self.on('afterUpdate', function(state, prevState) {
-    const pv = self.utility.getProp(prevState, prop)
-    const cv = self.utility.getProp(state, prop)
+    const pv = self.utility.getProp(prevState, _path)
+    const cv = self.utility.getProp(state, _path)
 
     if (!self.utility.isEqual(cv, pv)) {
       cb(cv, pv)
