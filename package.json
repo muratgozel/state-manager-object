@@ -1,6 +1,6 @@
 {
   "name": "state-manager-object",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "State management for javascript modules, libraries and apps.",
   "main": "dist/index.js",
   "scripts": {
@@ -36,6 +36,6 @@
   },
   "dependencies": {
     "event-emitter-object": "^0.1.8",
-    "my-little-lodash": "^0.1.1"
+    "my-little-lodash": "^1.0.3"
   }
 }
