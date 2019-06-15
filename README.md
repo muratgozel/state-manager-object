@@ -17,7 +17,6 @@ This package exports multiple builds. Developer has the responsibility to choose
 This is basically the source code itself but minified. There are no compilation and polyfills inside. Use it if you already have a compiler (like babel) and polyfills in your project. (which is mostly is the case.)
 
 ```js
-// just 1230 bytes
 const StateManagerObject = require('state-manager-object')
 ```
 
@@ -111,23 +110,23 @@ state.subscribe(['address', 'country'], function(value, prev) {
 
 ## API
 
-### setInitialState(obj)
+### .setInitialState(obj)
 
 Any call to update state will be canceled unless you set initial state first.
 
-### updateState(obj)
+### .updateState(obj)
 
 Updates the state.
 
-### getState()
+### .getState()
 
 Returns the current state.
 
-### getPrevState()
+### .getPrevState()
 
 Returns the previous state.
 
-### subscribe(path, cb)
+### .subscribe(path, cb)
 
 Runs callback when a property in specified path changes.
 
