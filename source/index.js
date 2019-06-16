@@ -1,5 +1,5 @@
-const EventEmitter = require('event-emitter-object')
-const utility = require('my-little-lodash')
+const EventEmitter = require('event-emitter-object/source')
+const utility = require('my-little-lodash/source')
 
 function StateManager() {}
 
