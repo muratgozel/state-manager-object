@@ -1,11 +1,16 @@
 const EventEmitter = require('event-emitter-object/source')
 const utility = require('my-little-lodash/source')
 
-function StateManager() {}
+function StateManager() {
+  EventEmitter.call(this)
+}
+
+StateManager.prototype = Object.create(EventEmitter.prototype)
+StateManager.prototype.constructor = StateManager
 
 StateManager.prototype.utility = utility
-StateManager.prototype.state = null
-StateManager.prototype.prevState = null
+StateManager.prototype._state = null
+StateManager.prototype._prevState = null
 
 StateManager.prototype.updateState = function updateState(value) {
   if (!this.utility.isObject(value)) {
@@ -25,8 +30,8 @@ StateManager.prototype.updateState = function updateState(value) {
 
   this.emit('beforeUpdate', [currentState, nextState])
 
-  this.prevState = currentState
-  this.state = nextState
+  this._prevState = currentState
+  this._state = nextState
 
   this.emit('afterUpdate', [this.getState(), this.getPrevState()])
 }
@@ -49,21 +54,17 @@ StateManager.prototype.subscribe = function subscribe(_path, cb) {
 }
 
 StateManager.prototype.getState = function getState() {
-  return this.state
+  return this._state
 }
 
 StateManager.prototype.getPrevState = function getPrevState() {
-  return this.prevState
+  return this._prevState
 }
 
 StateManager.prototype.setInitialState = function setInitialState(obj) {
   if (this.utility.isObject(obj) && this.utility.isNull(this.getState())) {
-    this.state = obj
+    this._state = obj
   }
 }
-
-StateManager.prototype = Object.assign(
-  {}, StateManager.prototype, EventEmitter.prototype
-)
 
 module.exports = StateManager

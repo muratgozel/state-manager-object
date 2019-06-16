@@ -42,34 +42,42 @@ The source code compiled with babel and bundled with `browserify` to generate a 
 <script src="https://unpkg.com/state-manager-object@0/dist/umd.polyfilled.js" crossorigin type="text/javascript"></script>
 ```
 
-## Initiation
+## Use
 
-**Plug into your object**
+This is a pure javascript object which can be used as a super class of another objects or as a standalone.
+
+### Using it as a standalone library
 
 ```js
 const StateManagerObject = require('state-manager-object')
 
-function MyObject() {}
-MyObject.prototype.someMethod = function someMethod() {}
+const appState = new StateManagerObject()
+appState.setInitialState({language: 'en'})
 
-MyObject.prototype = Object.assign(
-  {}, MyObject.prototype, StateManagerObject.prototype
-)
+appState.subscribe('language', function(currentLang, prevLang) {
+  // language changed!
+})
 
-const my = new MyObject()
-
-// all api methods of state manager is available in my.
-my.setInitialState({})
-my.updateState({})
+appState.updateState({language: 'tr'})
 ```
 
-**As Standalone**
+### Using as a super class
 
 ```js
 const StateManagerObject = require('state-manager-object')
 
-const state = new StateManagerObject()
-state.setInitialState({})
+// A Logger object which inherits the methods of EventEmitter
+function Logger() {
+  StateManagerObject.call(this)
+}
+Logger.prototype = Object.create(StateManagerObject.prototype)
+Logger.prototype.constructor = Logger
+
+Logger.prototype.propertyYouWant = function() {}
+
+// Initiate a logger for a particular type of logs
+const errorLogger = new Logger()
+errorLogger.setInitialState({logs: []})
 ```
 
 ### Listening for changes
@@ -132,7 +140,7 @@ Runs callback when a property in specified path changes.
 
 ### Event Emitter Methods
 
-You can look at this methods at [here](https://github.com/muratgozel/event-emitter-object).
+Please look at [here](https://github.com/muratgozel/event-emitter-object).
 
 ## Babel Polyfills Report
 
