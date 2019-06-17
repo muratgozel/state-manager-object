@@ -1,6 +1,6 @@
 {
   "name": "state-manager-object",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "State management for javascript modules, libraries and apps.",
   "main": "dist/index.js",
   "scripts": {

@@ -1,8 +1,10 @@
 const EventEmitter = require('event-emitter-object/source')
 const utility = require('my-little-lodash/source')
 
-function StateManager() {
-  EventEmitter.call(this)
+function StateManager(initialState, initialEvents) {
+  EventEmitter.call(this, initialEvents || {})
+
+  this._state = initialState
 }
 
 StateManager.prototype = Object.create(EventEmitter.prototype)
