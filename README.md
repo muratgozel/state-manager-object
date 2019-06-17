@@ -51,8 +51,8 @@ This is a pure javascript object which can be used as a super class of another o
 ```js
 const StateManagerObject = require('state-manager-object')
 
-const appState = new StateManagerObject()
-appState.setInitialState({language: 'en'})
+const initialState = {language: 'en'}
+const appState = new StateManagerObject(initialState)
 
 appState.subscribe('language', function(currentLang, prevLang) {
   // language changed!
@@ -68,7 +68,7 @@ const StateManagerObject = require('state-manager-object')
 
 // A Logger object which inherits the methods of EventEmitter
 function Logger() {
-  StateManagerObject.call(this)
+  StateManagerObject.call(this, initialState)
 }
 Logger.prototype = Object.create(StateManagerObject.prototype)
 Logger.prototype.constructor = Logger
@@ -77,7 +77,6 @@ Logger.prototype.propertyYouWant = function() {}
 
 // Initiate a logger for a particular type of logs
 const errorLogger = new Logger()
-errorLogger.setInitialState({logs: []})
 ```
 
 ### Listening for changes
@@ -98,9 +97,7 @@ state.on('afterUpdate', function(currentState, prevState) {})
 **Subscribing to a property**
 
 ```js
-const state = new StateManagerObject()
-
-state.setInitialState({
+const state = new StateManagerObject({
   name: 'Murat',
   address: {
     country: 'TR'
@@ -117,10 +114,6 @@ state.subscribe(['address', 'country'], function(value, prev) {
 ```
 
 ## API
-
-### .setInitialState(obj)
-
-Any call to update state will be canceled unless you set initial state first.
 
 ### .updateState(obj)
 

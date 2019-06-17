@@ -4,14 +4,13 @@ const utility = require('my-little-lodash/source')
 function StateManager(initialState, initialEvents) {
   EventEmitter.call(this, initialEvents || {})
 
-  this._state = initialState
+  this._state = initialState || {}
 }
 
 StateManager.prototype = Object.create(EventEmitter.prototype)
 StateManager.prototype.constructor = StateManager
 
 StateManager.prototype.utility = utility
-StateManager.prototype._state = null
 StateManager.prototype._prevState = null
 
 StateManager.prototype.updateState = function updateState(value) {
@@ -19,8 +18,8 @@ StateManager.prototype.updateState = function updateState(value) {
     return;
   }
 
-  if (this.utility.isNull(this.getState())) {
-    throw new Error('Please call setInitialState first.')
+  if (!this.utility.isObject(this.getState())) {
+    throw new Error('Current state is not an object and therefore canceled state update operation.')
   }
 
   const currentState = Object.assign({}, this.getState())
@@ -61,12 +60,6 @@ StateManager.prototype.getState = function getState() {
 
 StateManager.prototype.getPrevState = function getPrevState() {
   return this._prevState
-}
-
-StateManager.prototype.setInitialState = function setInitialState(obj) {
-  if (this.utility.isObject(obj) && this.utility.isNull(this.getState())) {
-    this._state = obj
-  }
 }
 
 module.exports = StateManager
