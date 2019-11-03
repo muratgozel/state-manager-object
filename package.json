@@ -1,6 +1,6 @@
 {
   "name": "state-manager-object",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "State management for javascript modules, libraries and apps.",
   "main": "dist/index.js",
   "scripts": {
@@ -26,16 +26,16 @@
   },
   "homepage": "https://github.com/muratgozel/state-manager-object#readme",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "babel-minify": "^0.5.0",
-    "babel-preset-minify": "^0.5.0",
-    "browserify": "^16.2.3",
-    "core-js": "^3.1.4"
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "babel-minify": "^0.5.1",
+    "babel-preset-minify": "^0.5.1",
+    "browserify": "^16.5.0",
+    "core-js": "^3.3.6"
   },
   "dependencies": {
     "event-emitter-object": "^1.0.4",
-    "my-little-lodash": "^1.5.0"
+    "my-little-lodash": "^2.0.1"
   }
 }
