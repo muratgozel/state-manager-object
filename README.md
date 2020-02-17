@@ -31,7 +31,7 @@ const StateManagerObject = require('state-manager-object/dist/umd')
 or
 
 ```html
-<script src="https://unpkg.com/state-manager-object@0/dist/umd.js" crossorigin type="text/javascript"></script>
+<script src="https://unpkg.com/state-manager-object@1/dist/umd.js" crossorigin type="text/javascript"></script>
 ```
 
 3. **Polyfilled UMD bundle**
@@ -39,7 +39,7 @@ or
 The source code compiled with babel and bundled with `browserify` to generate a `UMD` bundle. This bundle can also be imported by html script tag. The variable attached to the browser's `window` object is `StateManagerObject`.
 
 ```html
-<script src="https://unpkg.com/state-manager-object@0/dist/umd.polyfilled.js" crossorigin type="text/javascript"></script>
+<script src="https://unpkg.com/state-manager-object@1/dist/umd.polyfilled.js" crossorigin type="text/javascript"></script>
 ```
 
 ## Use

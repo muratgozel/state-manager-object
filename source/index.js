@@ -1,31 +1,35 @@
 const EventEmitter = require('event-emitter-object/source')
-const utility = require('my-little-lodash/source')
+const kit = require('@basekits/core')
 
-function StateManager(initialState, initialEvents) {
+function StateManager(initialState = {}, initialEvents = {}) {
   EventEmitter.call(this, initialEvents || {})
 
   this._state = initialState || {}
+
+  this.kit = kit
+  this.kit.addKit(require('@basekits/kit-type'))
+  this.kit.addKit(require('@basekits/kit-error'))
+  this.kit.addKit(require('@basekits/kit-validator'))  
 }
 
 StateManager.prototype = Object.create(EventEmitter.prototype)
 StateManager.prototype.constructor = StateManager
 
-StateManager.prototype.utility = utility
 StateManager.prototype._prevState = null
 
 StateManager.prototype.updateState = function updateState(value) {
-  if (!this.utility.isObject(value)) {
+  if (!this.kit.isObject(value)) {
     return;
   }
 
-  if (!this.utility.isObject(this.getState())) {
+  if (!this.kit.isObject(this.getState())) {
     throw new Error('Current state is not an object and therefore canceled state update operation.')
   }
 
   const currentState = Object.assign({}, this.getState())
   const nextState = Object.assign({}, currentState, value)
 
-  if (this.utility.isEqual(currentState, nextState)) {
+  if (this.kit.isEqual(currentState, nextState)) {
     return;
   }
 
@@ -40,15 +44,15 @@ StateManager.prototype.updateState = function updateState(value) {
 StateManager.prototype.subscribe = function subscribe(_path, cb) {
   const self = this
 
-  if (!self.utility.isFunction(cb)) return;
+  if (!self.kit.isFunction(cb)) return;
 
-  if (!self.utility.isString(_path) && !self.utility.isArray(_path)) return;
+  if (!self.kit.isString(_path) && !self.kit.isArray(_path)) return;
 
   self.on('afterUpdate', function(state, prevState) {
-    const pv = self.utility.getProp(prevState, _path)
-    const cv = self.utility.getProp(state, _path)
+    const pv = self.kit.getProp(prevState, _path)
+    const cv = self.kit.getProp(state, _path)
 
-    if (!self.utility.isEqual(cv, pv)) {
+    if (!self.kit.isEqual(cv, pv)) {
       cb(cv, pv)
     }
   })
