@@ -1,53 +1,35 @@
 # State Manager Object
-
 State management for javascript modules, libraries and apps.
 
-## Install
+![NPM](https://img.shields.io/npm/l/state-manager-object)
+[![npm version](https://badge.fury.io/js/state-manager-object.svg)](https://badge.fury.io/js/state-manager-object)
+![npm bundle size](https://img.shields.io/bundlephobia/min/state-manager-object)
+![npm](https://img.shields.io/npm/dy/state-manager-object)
 
+## Install
 ```sh
 npm install state-manager-object
 ```
 
 ## Import
-
-This package exports multiple builds. Developer has the responsibility to choose the one that best fits to her/his needs.
-
-1. **Minified (default)**
-
-This is basically the source code itself but minified. There are no compilation and polyfills inside. Use it if you already have a compiler (like babel) and polyfills in your project. (which is mostly is the case.)
+There are different types of distributions depending on your use case. Essentially, the package can be imported via require:
 
 ```js
-const StateManagerObject = require('state-manager-object')
+const kit = require('state-manager-object')
 ```
 
-2. **UMD Bundle**
-
-The source code bundled with `browserify` to generate a `UMD` bundle. This bundle can also be imported by html script tag. No compilation and polyfills. The variable attached to the browser's `window` object is `StateManagerObject`.
-
-```js
-const StateManagerObject = require('state-manager-object/dist/umd')
-```
-
-or
+or via script tag:
 
 ```html
-<script src="https://unpkg.com/state-manager-object@1/dist/umd.js" crossorigin type="text/javascript"></script>
+<script src="https://unpkg.com/state-manager-object@1/dist/state-manager-object.iife.js" crossorigin type="text/javascript"></script>
 ```
 
-3. **Polyfilled UMD bundle**
-
-The source code compiled with babel and bundled with `browserify` to generate a `UMD` bundle. This bundle can also be imported by html script tag. The variable attached to the browser's `window` object is `StateManagerObject`.
-
-```html
-<script src="https://unpkg.com/state-manager-object@1/dist/umd.polyfilled.js" crossorigin type="text/javascript"></script>
-```
+but there are lots of other options. See distribution report below.
 
 ## Use
-
 This is a pure javascript object which can be used as a super class of another objects or as a standalone.
 
 ### Using it as a standalone library
-
 ```js
 const StateManagerObject = require('state-manager-object')
 
@@ -62,7 +44,6 @@ appState.updateState({language: 'tr'})
 ```
 
 ### Using as a super class
-
 ```js
 const StateManagerObject = require('state-manager-object')
 
@@ -80,7 +61,6 @@ const errorLogger = new Logger()
 ```
 
 ### Listening for changes
-
 The object also has a built in [event emitter][18d9171b]. You can subscribe for changes in a certain property in a state or in any property.
 
   [18d9171b]: https://github.com/muratgozel/event-emitter-object "event emitter"
@@ -135,8 +115,63 @@ Runs callback when a property in specified path changes.
 
 Please look at [here](https://github.com/muratgozel/event-emitter-object).
 
+---
+
+## Distributions Report
+This is an auto-generated report that shows the type, name and size of the bundles available to use individually.
+
+[comment]: # (DISTRIBUTIONS_REPORT_START)
+```js
+[
+  "state-manager-object.amd.js (1.11 KB)",
+  "state-manager-object.amd.polyfilled.js (7.33 KB)",
+  "state-manager-object.cjs.js (1.11 KB)",
+  "state-manager-object.cjs.polyfilled.js (7.32 KB)",
+  "state-manager-object.es.js (0.95 KB)",
+  "state-manager-object.es.polyfilled.js (7.17 KB)",
+  "state-manager-object.iife.js (1.12 KB)",
+  "state-manager-object.iife.polyfilled.js (7.33 KB)",
+  "state-manager-object.umd.js (1.36 KB)",
+  "state-manager-object.umd.polyfilled.js (7.58 KB)"
+]
+```
+[comment]: # (DISTRIBUTIONS_REPORT_END)
+
 ## Babel Polyfills Report
+This is an auto-generated report that shows the pollyfils added by core-js to the **pollyfilled** distributions based on the targets configuration described below.
 
-This module uses the following polyfills in its polyfilled builds.
+[comment]: # (BABEL_POLYFILLS_REPORT_START)
+```js
+// polyfills:
+[
+  "es.symbol",
+  "es.symbol.description",
+  "es.symbol.iterator",
+  "es.array.iterator",
+  "es.object.get-prototype-of",
+  "es.object.set-prototype-of",
+  "es.object.to-string",
+  "es.reflect.construct",
+  "es.regexp.to-string",
+  "es.string.iterator",
+  "web.dom-collections.iterator",
+  "es.object.assign"
+]
+// based on the targets:
+{
+  "android": "4.4.3",
+  "chrome": "49",
+  "edge": "17",
+  "firefox": "52",
+  "ie": "9",
+  "ios": "9.3",
+  "opera": "66",
+  "safari": "11.1",
+  "samsung": "4"
+}
+```
+[comment]: # (BABEL_POLYFILLS_REPORT_END)
 
-1. `es.object.assign`
+Thanks for watching 🐬
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F1RFO7)
