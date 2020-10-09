@@ -123,16 +123,16 @@ This is an auto-generated report that shows the type, name and size of the bundl
 [comment]: # (DISTRIBUTIONS_REPORT_START)
 ```js
 [
-  "state-manager-object.amd.js (1.11 KB)",
-  "state-manager-object.amd.polyfilled.js (7.33 KB)",
-  "state-manager-object.cjs.js (1.11 KB)",
-  "state-manager-object.cjs.polyfilled.js (7.32 KB)",
+  "state-manager-object.amd.js (1.15 KB)",
+  "state-manager-object.amd.polyfilled.js (7.36 KB)",
+  "state-manager-object.cjs.js (1.15 KB)",
+  "state-manager-object.cjs.polyfilled.js (7.37 KB)",
   "state-manager-object.es.js (0.95 KB)",
   "state-manager-object.es.polyfilled.js (7.17 KB)",
-  "state-manager-object.iife.js (1.12 KB)",
-  "state-manager-object.iife.polyfilled.js (7.33 KB)",
-  "state-manager-object.umd.js (1.36 KB)",
-  "state-manager-object.umd.polyfilled.js (7.58 KB)"
+  "state-manager-object.iife.js (1.15 KB)",
+  "state-manager-object.iife.polyfilled.js (7.37 KB)",
+  "state-manager-object.umd.js (1.44 KB)",
+  "state-manager-object.umd.polyfilled.js (7.65 KB)"
 ]
 ```
 [comment]: # (DISTRIBUTIONS_REPORT_END)
@@ -159,14 +159,14 @@ This is an auto-generated report that shows the pollyfils added by core-js to th
 ]
 // based on the targets:
 {
-  "android": "4.4.3",
+  "android": "83",
   "chrome": "49",
-  "edge": "17",
-  "firefox": "52",
+  "edge": "18",
+  "firefox": "68",
   "ie": "9",
   "ios": "9.3",
-  "opera": "66",
-  "safari": "11.1",
+  "opera": "68",
+  "safari": "5.1",
   "samsung": "4"
 }
 ```
