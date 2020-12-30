@@ -1,64 +1,62 @@
-import EventEmitterObject from 'event-emitter-object'
-import {objectkit, validationkit} from 'basekits'
+const {typekit, objectkit, validationkit} = require('basekits')
+const EventEmitterObject = require('event-emitter-object')
 
-function StateManager(initialState, initialEvents) {
-  EventEmitterObject.call(this, initialEvents)
-
-  this.checkInitialState(initialState)
-}
-
-StateManager.prototype = Object.create(EventEmitterObject.prototype)
-StateManager.prototype.constructor = StateManager
-
-StateManager.prototype._state = {}
-StateManager.prototype._prevState = null
-
-StateManager.prototype.checkInitialState = function checkInitialState(initialState = undefined) {
-  if (validationkit.isObject(initialState)) {
-    this._state = initialState
-  }
-}
-
-StateManager.prototype.updateState = function updateState(value) {
-  if (!validationkit.isObject(value)) return undefined;
-
-  const currentState = Object.assign({}, this.getState())
-  const nextState = Object.assign({}, currentState, value)
-
-  if (validationkit.isEqual(currentState, nextState)) {
-    return false;
-  }
-
-  this._prevState = currentState
-  this._state = nextState
-
-  this.emit('update', [this.getState(), this.getPrevState()])
-
-  return true
-}
-
-StateManager.prototype.subscribe = function subscribe(_path, cb) {
-  const self = this
-
-  if (!validationkit.isFunction(cb)) return undefined;
-  if (!validationkit.isString(_path) && !validationkit.isArray(_path)) return undefined;
-
-  self.on('update', function(state, prevState) {
-    const pv = objectkit.getProp(prevState, _path)
-    const cv = objectkit.getProp(state, _path)
-
-    if (!validationkit.isEqual(cv, pv)) {
-      cb(cv, pv)
+function StateManagerObject() {
+  function StateManager(initialState=undefined) {
+    if (!typekit.isObject(initialState)) {
+      throw new Error('Invalid initial state.')
     }
-  })
+    const eventEmitter = EventEmitterObject.create()
+    const _state = {
+      state: initialState,
+      prevState: null
+    }
+
+    function updateState(payload) {
+      if (!typekit.isObject(payload)) {
+        throw new Error('Invalid payload.')
+      }
+
+      const currentState = getState()
+      const nextState = Object.assign({}, currentState, payload)
+
+      if (validationkit.isEqual(currentState, nextState)) return;
+
+      _state.state = nextState
+      _state.prevState = currentState
+
+      eventEmitter.emit('update', [_state.state, _state.prevState])
+    }
+
+    function subscribe(path, fn) {
+      eventEmitter.on('update', function(currentState, prevState) {
+        const currentValue = objectkit.getProp(currentState, path)
+        const prevValue = objectkit.getProp(prevState, path)
+        if (!typekit.isEqual(currentValue, prevValue)) {
+          fn(currentValue, prevValue)
+        }
+      })
+    }
+
+    function getState() {
+      return _state.state
+    }
+
+    function getPrevState() {
+      return _state.prevState
+    }
+
+    return {
+      getState: getState,
+      getPrevState: getPrevState,
+      updateState: updateState,
+      subscribe: subscribe
+    }
+  }
+
+  return {
+    create: StateManager
+  }
 }
 
-StateManager.prototype.getState = function getState() {
-  return this._state
-}
-
-StateManager.prototype.getPrevState = function getPrevState() {
-  return this._prevState
-}
-
-export default StateManager
+module.exports = StateManagerObject()
