@@ -44,6 +44,11 @@ appState.subscribe('doc.head.title', function(currentValue, prevValue) {
   prevValue == 'Test 2'
 })
 appState.updateState({doc: {head: {title: 'Test 3'}}})
+
+// subscribe to all state updates
+appState.subscribe(function(currentState, prevState) {
+  // do something with current and prev states
+})
 ```
 Events are managed by [event emitter][18d9171b].
 
@@ -57,16 +62,16 @@ This is an auto-generated report that shows the type, name and size of the bundl
 [comment]: # (DISTRIBUTIONS_REPORT_START)
 ```js
 [
-  "state-manager-object.amd.js (0.85 KB)",
-  "state-manager-object.amd.polyfilled.js (7.13 KB)",
-  "state-manager-object.cjs.js (0.87 KB)",
-  "state-manager-object.cjs.polyfilled.js (7.16 KB)",
-  "state-manager-object.es.js (0.74 KB)",
-  "state-manager-object.es.polyfilled.js (7.02 KB)",
-  "state-manager-object.iife.js (0.86 KB)",
-  "state-manager-object.iife.polyfilled.js (7.14 KB)",
-  "state-manager-object.umd.js (1.15 KB)",
-  "state-manager-object.umd.polyfilled.js (7.43 KB)"
+  "state-manager-object.amd.js (1.07 KB)",
+  "state-manager-object.amd.polyfilled.js (7.35 KB)",
+  "state-manager-object.cjs.js (1.08 KB)",
+  "state-manager-object.cjs.polyfilled.js (7.38 KB)",
+  "state-manager-object.es.js (0.95 KB)",
+  "state-manager-object.es.polyfilled.js (7.24 KB)",
+  "state-manager-object.iife.js (1.07 KB)",
+  "state-manager-object.iife.polyfilled.js (7.36 KB)",
+  "state-manager-object.umd.js (1.36 KB)",
+  "state-manager-object.umd.polyfilled.js (7.64 KB)"
 ]
 ```
 [comment]: # (DISTRIBUTIONS_REPORT_END)

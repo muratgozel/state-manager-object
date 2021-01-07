@@ -28,11 +28,18 @@ function StateManagerObject() {
       eventEmitter.emit('update', [_state.state, _state.prevState])
     }
 
-    function subscribe(path, fn) {
+    function subscribe(arg1, arg2=undefined) {
+      const path = typeof arg1 == 'string' ? arg1 : undefined
+      const fn = typeof path == 'undefined' ? arg1 : arg2
+      if (typeof fn != 'function') {
+        throw new Error('Subscriber function should be a type of function.')
+      }
+
       eventEmitter.on('update', function(currentState, prevState) {
-        const currentValue = objectkit.getProp(currentState, path)
-        const prevValue = objectkit.getProp(prevState, path)
-        if (!typekit.isEqual(currentValue, prevValue)) {
+        const currentValue = path ? objectkit.getProp(currentState, path) : currentState
+        const prevValue = path ? objectkit.getProp(prevState, path) : prevState
+
+        if (!validationkit.isEqual(currentValue, prevValue)) {
           fn(currentValue, prevValue)
         }
       })

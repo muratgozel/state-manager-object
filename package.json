@@ -1,6 +1,6 @@
 {
   "name": "state-manager-object",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "State management for javascript modules, libraries and apps.",
   "main": "dist/state-manager-object.cjs.js",
   "scripts": {
@@ -39,8 +39,8 @@
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.1",
     "colors": "^1.4.0",
-    "core-js": "^3.8.1",
-    "rollup": "^2.35.1",
+    "core-js": "^3.8.2",
+    "rollup": "^2.36.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-terser": "^7.0.2",
     "semver": "^7.3.4",
